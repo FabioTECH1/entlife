@@ -11,12 +11,14 @@ class Blog extends Model
 {
     use HasFactory;
     use Sluggable;
-    protected $fillable = ['title', 'slug', 'description', 'picture', 'content'];
-    public function sluggable(): array{
+    // protected $fillable = ['title', 'slug', 'description', 'picture', 'content'];
+    protected $guarded = ['id'];
+    public function sluggable(): array
+    {
         return [
             'slug' => [
-                'source'=> 'title'
+                'source' => 'title'
             ]
-            ];
+        ];
     }
 }

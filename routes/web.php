@@ -25,10 +25,10 @@ use App\Http\Controllers\ContactController;
 
 Route::get('/', [entController::class, 'home'])->name('home');
 Route::get('/login', [UserController::class, 'login'])->name('login');
-Route::post('/auth', [UserController::class, 'auth'] )->name('auth');
+Route::post('/auth', [UserController::class, 'auth'])->name('auth');
 Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::post('/store', [UserController::class, 'store'])->name('store');
-Route::get('/blog',[BlogController::class, 'index'])->name('blog');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/create-post', [BlogController::class, 'create'])->name('create-post');
 Route::post('/store-post', [BlogController::class, 'store'])->name('store-post');
 Route::get('/about-us', [entController::class, 'about'])->name('about-us');
@@ -43,4 +43,5 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/messages', [ContactController::class, 'messages'])->name('messages');
 Route::get('/courses', [entController::class, 'courses'])->name('courses');
 
-Route::get('/blog/{slug}', BlogShow::class, 'show')->name('show-blog');
+// Route::get('/blog/{slug}', BlogShow::class, 'show')->name('show-blog');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('show-blog');

@@ -89,16 +89,17 @@ class BlogController extends Controller
             'picture' => 'nullable|mimes:jpg,png,jpeg|max:5048',
             'content' => 'nullable',
         ]);
-     
- 
+
+
 
         //    $newImageName = uniqid() . '-' . $request->title . '.'  . $request->picture->extension();    
         //    dd($newImageName);
         //       $request->picture->move(public_path('images'), $newImageName);
         $post = Blog::find($id);
-        $post->title = $request->input('title');
-        $post->description = $request->input('description');
-          $post->content = $request->input('content');
+        // $post->title = $request->title;
+        // $post->description = $request->description;
+        // $post->content = $request->content;
+        // dd($request->all());
         if ($request->hasFile('image')) {
             $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();
@@ -106,11 +107,17 @@ class BlogController extends Controller
             $file->move('/images' . $filename);
             $post->picture = $file;
         }
-        
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'description' => $request->description,
+        ]);
         // $post->create(
-          
+
         // ); 
-        $post->save();
+        // dd($post);
+
+        // $post->save();
         return redirect('/blog')->with('message', 'Post Updated Successfully');
     }
 
